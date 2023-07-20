@@ -1,11 +1,11 @@
 const authCom = require("./auth-model");
 
 const checkForExistingUser = async (req, res, next) => {
-  const [user] = await authCom.findByUsername(req.body.username);
+  const [user] = await authCom.getByUsername(req.body.username);
   console.log(user);
   try {
     if (user) {
-      next({ status: 422, message: "Username taken" });
+      next({ status: 401, message: "Username taken" });
     } else {
       req.user = user;
       next();
@@ -16,7 +16,7 @@ const checkForExistingUser = async (req, res, next) => {
 };
 
 const validateUsername = async (req, res, next) => {
-  const [user] = await authCom.findByUsername(req.body.username);
+  const [user] = await authCom.getByUsername(req.body.username);
   console.log(user);
   try {
     if (user) {
