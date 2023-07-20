@@ -8,8 +8,13 @@ function getByUsername(username) {
   return db("users").where("username", username);
 }
 
-const insertUser = (user) => {
-  return db("users").insert(user);
-};
+async function createUser({ username, password }) {
+  const [id] = await db("users").insert({ username, password });
+  return await getByUsername(id);
+}
 
-module.exports = { getAll, getByUsername, insertUser };
+function deleteUser(id) {
+  return db("users").where("id", id).del();
+}
+
+module.exports = { getAll, getByUsername, createUser, deleteUser };
