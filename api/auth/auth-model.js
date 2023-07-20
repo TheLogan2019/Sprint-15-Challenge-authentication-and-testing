@@ -1,8 +1,8 @@
 const db = require("../../data/dbConfig");
 
-const getAll = () => {
-  return db("users");
-};
+function getById(id) {
+  return db("users").where("id", id).first();
+}
 
 function getByUsername(username) {
   return db("users").where("username", username);
@@ -10,11 +10,11 @@ function getByUsername(username) {
 
 async function createUser({ username, password }) {
   const [id] = await db("users").insert({ username, password });
-  return await getByUsername(id);
+  return await getById(id);
 }
 
 function deleteUser(id) {
   return db("users").where("id", id).del();
 }
 
-module.exports = { getAll, getByUsername, createUser, deleteUser };
+module.exports = { getById, getByUsername, createUser, deleteUser };
