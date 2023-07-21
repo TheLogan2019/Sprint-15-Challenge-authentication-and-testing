@@ -13,8 +13,8 @@ const authCom = require("./auth-model");
 
 router.post(
   "/register",
-  checkForExistingUser,
   validateCredentials,
+  checkForExistingUser,
   (req, res, next) => {
     const { username, password } = req.body;
     const hash = bcrypt.hashSync(password, 5);
@@ -60,8 +60,8 @@ function generateToken(user) {
 
 router.post(
   "/login",
-  validateUsername,
   validateCredentials,
+  validateUsername,
   (req, res, next) => {
     if (bcrypt.compareSync(req.body.password, req.user.password)) {
       const token = generateToken(req.user);
