@@ -33,9 +33,7 @@ const validateUsername = async (req, res, next) => {
 const validateCredentials = (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    res.status(401).json({
-      message: "username and password required",
-    });
+    next({ status: 401, message: "username and password required" });
   }
   next();
 };
