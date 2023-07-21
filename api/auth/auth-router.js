@@ -11,22 +11,17 @@ const {
 
 const authCom = require("./auth-model");
 
-router.post(
-  "/register",
-  checkForExistingUser,
-  validateCredentials,
-  (req, res, next) => {
-    const { username, password } = req.body;
-    const hash = bcrypt.hashSync(password, 5);
+router.post("/register", checkForExistingUser, (req, res, next) => {
+  const { username, password } = req.body;
+  const hash = bcrypt.hashSync(password, 5);
 
-    authCom
-      .createUser({ username, password: hash })
-      .then((result) => {
-        res.status(201).json(result);
-      })
-      .catch(next);
-  }
-);
+  authCom
+    .createUser({ username, password: hash })
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch(next);
+});
 
 /*
     1- In order to register a new account the client must provide `username` and `password`:
