@@ -36,7 +36,7 @@ describe("[POST] /api/auth/register", () => {
     const res = await request(server).post("/api/auth/register").send(user);
     expect(res.status).toBe(201);
   });
-  test("throws a 401 in case of imcomplete credentials", async () => {
+  test("throws a 401 in case of incomplete credentials", async () => {
     const res = await request(server)
       .post("/api/auth/register")
       .send(incompleteUser);
