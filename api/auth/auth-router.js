@@ -17,7 +17,7 @@ router.post(
   validateCredentials,
   (req, res, next) => {
     const { username, password } = req.body;
-    const hash = bcrypt.hashSync(password, 2);
+    const hash = bcrypt.hashSync(password, 7);
 
     authCom
       .createUser({ username, password: hash })
