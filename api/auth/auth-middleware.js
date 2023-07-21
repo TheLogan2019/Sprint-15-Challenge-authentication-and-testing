@@ -36,7 +36,7 @@ const validateCredentials = (req, res, next) => {
     res.status(401).json({
       message: "username and password required",
     });
-    next();
+    return;
   }
   next();
 };
