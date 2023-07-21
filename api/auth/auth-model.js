@@ -1,11 +1,11 @@
 const db = require("../../data/dbConfig");
 
-function getById(id) {
-  return db("users").where("id", id).first();
+async function getById(id) {
+  return await db("users").where("id", id).first();
 }
 
-function getByUsername(username) {
-  return db("users").where("username", username);
+async function getByUsername(username) {
+  return await db("users").where("username", username);
 }
 
 async function createUser({ username, password }) {
@@ -13,8 +13,8 @@ async function createUser({ username, password }) {
   return await getById(id);
 }
 
-function deleteUser(id) {
-  return db("users").where("id", id).del();
+async function deleteUser(id) {
+  return await db("users").where("id", id).del();
 }
 
 module.exports = { getById, getByUsername, createUser, deleteUser };
