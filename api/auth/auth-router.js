@@ -11,10 +11,13 @@ const {
 
 const authCom = require("./auth-model");
 
-//prettier-ignore
-router.post("/register", checkForExistingUser, validateCredentials, (req, res, next) => {
-    const { username, password } = req.body; // eslint-disable-line
-    const hash = bcrypt.hashSync(password, 8);
+router.post(
+  "/register",
+  checkForExistingUser,
+  validateCredentials,
+  (req, res, next) => {
+    const { username, password } = req.body;
+    const hash = bcrypt.hashSync(password, 2);
 
     authCom
       .createUser({ username, password: hash })
